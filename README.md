@@ -1,17 +1,4 @@
 # TinyML Wake-Word Detection on Raspberry Pi Pico
->Wake-Word in less than $10!
-
-
-> Update 24th May 2021
-> We now recommend the Adafruit Auto-Gain microphone instead of adjustable gain.
-> We also now include a version for a PDM microphone, this is the recommended
-> microphone to use due to higher quality.
-
-For a deep dive of the code, please check my Hackster.io
-[post](https://www.hackster.io/hlsw/pico-wake-word-1e2372).
-
-![gif of yes and no](images/yes_no_gif.gif)
-<img src="images/setup.jpeg" width="500" height="500">
 
 This application implements the wake word example from
 [Tensorflow Lite for Microcontrollers](https://www.tensorflow.org/lite/microcontrollers)
@@ -23,14 +10,6 @@ the [Tensorflow Lite Micro examples folder](https://github.com/tensorflow/tensor
 
 We use as input an electret microphone to detect the words "yes" or "no" and
 turn the on-device LED on and off in response.
-
-## Acknowledgements
-
-This project was created on behalf of the
-[Arm Software Developers](https://developer.arm.com/) team, follow them on
-Twitter: [@ArmSoftwareDev](https://twitter.com/armsoftwaredev) and YouTube:
-[Arm Software Developers](https://www.youtube.com/channel/UCHUAckhCfRom2EHDGxwhfOg)
-for more resources!
 
 ### Pico Microphone
 
@@ -141,16 +120,6 @@ Once done you can test your tolchain setup by running some of the examples
 found in the Pico examples
 [repository](https://github.com/raspberrypi/pico-examples).
 
-
-You can now clone this repository.
-
-```
-git clone https://github.com/henriwoodcock/pico-wake-word.git
-cd pico-wake-word
-git submodule init
-git submodule update
-```
-
 ## Wake-Word uf2 file
 
 The easiest way to get started on this application is to use the provided `.uf2`
@@ -165,46 +134,6 @@ your Raspberry Pi or another computer.
 2. It will mount as a Mass Storage Device called RPI-RP2.
 3. Drag and drop the `micro_speech.uf2` binary onto the RPI-RP2 volume.
 4. Pico will reboot, and the built-in LED should start blinking.
-
-You can access the output on your Pico by viewing the serial console. There are
-many applications for this. Raspberry Pi recommends using `minicom`. However,
-if you are on macOS, you can use the in-built `screen`.
-
-You first need to find the name of your Pico.
-
-On macOS:
-
-```
-ls /dev/cu*
-```
-
-On Linux:
-
-```
-ls /dev/tty*
-```
-
-Copy your device name (hint: if you are unsure which device is your Pico:
-unplug your Pico, re-run the command and then plug your Pico back in, after
-re-running the command once more, the new device will be your Pico) and then
-run the following:
-
-
-Using `screen`:
-
-```
-screen {device_name} 115200
-```
-
-Using `minicom`:
-
-```
-minicom -b 115200 -o -D {device_name}
-```
-
-You should now be able to see an output similar to the following:
-
-![Screen showing the output from the Pico](images/output_screen.png)
 
 ## Build Yourself
 
@@ -311,15 +240,5 @@ const struct analog_microphone_config config = {
 
 You can change the different settings to best suit your need.
 
-## Contributions
 
-There are possibly many ways to improve this work. Please feel free to make a
-PR for any improvements made.
 
-## License
-
-This repository is licensed under Apache License 2.0. Tensorflow and
-CMSIS-NN are also both licensed under Apache License 2.0, Pico-SDK is licensed
-under BSD 3-Clause "New" or "Revised" License. For other libraries and packages
-used in this repository, please find the licenses in the
-`micro_speech/third_party` folder.
