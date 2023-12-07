@@ -76,9 +76,6 @@ sub-sections, hardware requirements, hardware setup and software setup.
 - 2x 1x20 male header pins (for the Pico)
 - 1x 1x5 male header pins (for the microphone)
 
-
-### Hardware Setup
-
 #### Assembly
 
 1. Solder headers onto your Raspberry Pi Pico
