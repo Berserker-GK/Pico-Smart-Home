@@ -94,8 +94,6 @@ to one of the ADC pins on the Raspberry Pi Pico. Make the following connections:
 | GND                          | Any ground pin    |
 | VDD                          | 3V3(OUT) - Pin36  |
 
-![The Raspberry Pi Pico with analog mic](images/pico_wake_word_bb.png)
-
 #### PDM Microphone
 
 | __Adafruit PDM Microphone__ | __Raspberry Pi Pico__ |
@@ -106,7 +104,6 @@ to one of the ADC pins on the Raspberry Pi Pico. Make the following connections:
 | DAT                          | GPIO2             |
 | CLK                          | GPIO3             |
 
-![The Raspberry Pi Pico with PDM mic](images/pdm_setup.jpg)
 
 ### Software Setup
 
