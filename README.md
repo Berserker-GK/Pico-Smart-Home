@@ -48,9 +48,7 @@ PDM microphone to listen for samples, saving the CPU to perform the complex
 analysis.
 
 The Pico does not come with an onboard microphone. For this application, we use
-the Adafruit Auto-gain Electret Microphone Amplifier breakout or the Adafruit
-PDM MEMS Microphone Breakout.
-
+the Adafruit Auto-gain Electret Microphone Amplifier breakout.
 ## Before You Begin
 
 We will now go through the setup of the project. This section contains three
@@ -64,15 +62,6 @@ sub-sections, hardware requirements, hardware setup and software setup.
 - 1x [Electret Microphone Amplifier - MAX9814 with Auto Gain Control](https://www.adafruit.com/product/1713)
 - 1x Micro USB cable
 - 3x Jumper wires
-- 2x 1x20 male header pins (for the Pico)
-- 1x 1x5 male header pins (for the microphone)
-
-#### PDM Microphone
-
-- 1x [Raspberry Pi Pico](https://www.raspberrypi.org/products/raspberry-pi-pico/)
-- 1x [Adafruit PDM MEMS Microphone Breakout](https://www.adafruit.com/product/3492)
-- 1x Micro USB cable
-- 5x Jumper wires
 - 2x 1x20 male header pins (for the Pico)
 - 1x 1x5 male header pins (for the microphone)
 
@@ -94,16 +83,6 @@ to one of the ADC pins on the Raspberry Pi Pico. Make the following connections:
 | GND                          | Any ground pin    |
 | VDD                          | 3V3(OUT) - Pin36  |
 
-#### PDM Microphone
-
-| __Adafruit PDM Microphone__ | __Raspberry Pi Pico__ |
-|------------------------------|-------------------|
-| GND                          | Any ground pin    |
-| SEL                          | Any ground pin    |
-| VCC                          | 3V3(OUT) - Pin36  |
-| DAT                          | GPIO2             |
-| CLK                          | GPIO3             |
-
 
 ### Software Setup
 
@@ -114,62 +93,6 @@ Once done you can test your tolchain setup by running some of the examples
 found in the Pico examples
 [repository](https://github.com/raspberrypi/pico-examples).
 
-## Wake-Word uf2 file
-
-The easiest way to get started on this application is to use the provided `.uf2`
-file. Doing this means you will not have to build the application yourself. You
-can download the `.uf2` [here](build/micro_speech.uf2). Click on download, and
-your browser should start downloading a file called `micro_speech.uf2`.
-
-To install this onto your Pico, you need to do the following:
-
-1. Push and hold the BOOTSEL button and plug your Pico into the USB port of
-your Raspberry Pi or another computer.
-2. It will mount as a Mass Storage Device called RPI-RP2.
-3. Drag and drop the `micro_speech.uf2` binary onto the RPI-RP2 volume.
-4. Pico will reboot, and the built-in LED should start blinking.
-
-## Build Yourself
-
-With the Pico-SDK setup on your machine, building the application is the same as
-building any other Pico application.
-
-1. Change directory into this repository
-
-    ```
-    cd pico-wake-word
-    ```
-
-2. Initialize the submodules
-
-    ```
-    git submodule init
-    cd lib/pico-sdk
-    git submodule init
-    cd ../../
-    ```
-
-3. Make a build directory
-
-    ```
-    mkdir build
-    ```
-
-4. Generate the Makefiles
-
-    ```
-    cd build
-    cmake ..
-    ```
-
-5. Finally run the Makefile
-
-    ```
-    make -j8
-    ```
-
-Once done, your `pico_micro_speech_analog.uf2` and `pico_micro_speech_pdm.uf2`
-file is located in `build`.
 
 ## Making Changes
 
