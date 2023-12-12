@@ -56,11 +56,13 @@ sub-sections, hardware requirements, hardware setup and software setup.
 
 ### Hardware Requirements
 
-#### Analog Microphone
-
 - 1x [Raspberry Pi Pico](https://www.raspberrypi.org/products/raspberry-pi-pico/)
 - 1x [Electret Microphone Amplifier - MAX9814 with Auto Gain Control](https://www.adafruit.com/product/1713)
 - 1x Micro USB cable
+- 1x Micro USB cable
+- 2x LED
+- 2x Fans
+- 1x Ultrasonic Sensor
 - 3x Jumper wires
 - 2x 1x20 male header pins (for the Pico)
 - 1x 1x5 male header pins (for the microphone)
