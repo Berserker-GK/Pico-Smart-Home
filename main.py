@@ -8,46 +8,59 @@ led = Pin(16, Pin.OUT)
 led1 = Pin(18, Pin.OUT)
 uart = UART(0, 9600)
 
+# USS configuration
+signal_pin = Pin(0, Pin.IN)
+
 fan_state = 0
 fan1_state = 0
 bedroom_led_state = 0
 hall_led_state = 0
 
-trig_pin = Pin(0, Pin.OUT)  # GPIO pin for trigger
-echo_pin = Pin(1, Pin.IN)   # GPIO pin for echo
-
-sensor_active = False  # Flag to control sensor activation
-
 def control_device(pin, state):
     pin.value(state)
 
 def get_distance():
-    # Trigger pulse
-    trig_pin.value(0)
-    sleep(0.00002)
-    trig_pin.value(1)
-    sleep(0.00005)
-    trig_pin.value(0)
-
+    # Trigger measurement by briefly pulling the signal pin low
+    signal_pin.init(Pin.OUT)
+    signal_pin.value(0)
+    utime.sleep_us(2)
+    signal_pin.value(1)
+    utime.sleep_us(5)
+    signal_pin.value(0)
+    
     # Wait for the echo response
-    while echo_pin.value() == 0:
+    signal_pin.init(Pin.IN)
+    while signal_pin.value() == 0:
         pulse_start = utime.ticks_us()
 
-    while echo_pin.value() == 1:
+    while signal_pin.value() == 1:
         pulse_end = utime.ticks_us()
 
     pulse_duration = utime.ticks_diff(pulse_end, pulse_start)
-
+    
     # Speed of sound is approximately 343 meters per second at sea level
     # Convert the time to distance (cm)
     distance = (pulse_duration * 34300) / (2 * 10**6)
-
+    
     return distance
 
 while True:
+    # USS functionality
+    distance = get_distance()
+    print("Distance: {:.2f} cm".format(distance))
+    
+    if distance < 10:
+        # If distance is less than 10cm, turn on bedroom fan and light
+        fan_state = 1
+        bedroom_led_state = 1
+    else:
+        # If distance is greater than or equal to 10cm, turn off bedroom fan and light
+        fan_state = 0
+        bedroom_led_state = 0
+
+    # Main code to control other devices
     if uart.any():
         data = str(uart.read())
-
         print(data)
 
         if 'bedroom fan on' in data:
@@ -97,23 +110,7 @@ while True:
             fan_state = 0
             fan1_state = 0
 
-        if 'activate' in data:
-            sensor_active = True
-        elif 'deactivate' in data:
-            sensor_active = False
-
-    if sensor_active:
-        distance = get_distance()
-
-        # If the distance is greater than 10cm, turn on bedroom light and fan
-        if distance > 10:
-            bedroom_led_state = 1
-            fan_state = 1
-        else:
-            # If the distance is 10cm or less, turn off bedroom light and fan
-            bedroom_led_state = 0
-            fan_state = 0
-
+    # Control devices based on states
     control_device(fan, fan_state)
     control_device(fan1, fan1_state)
     control_device(led, bedroom_led_state)
