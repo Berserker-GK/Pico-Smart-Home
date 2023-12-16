@@ -1,40 +1,7 @@
-# TinyML Wake-Word Detection on Raspberry Pi Pico
-
-This application implements the wake word example from
-[Tensorflow Lite for Microcontrollers](https://www.tensorflow.org/lite/microcontrollers)
-on the Raspberry Pi Pico.
-
-The wake word example shows how to run a 20 kB neural network that can detect 2
-keywords, "yes" and "no". More information about this example is available on
-the [Tensorflow Lite Micro examples folder](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/micro_speech).
-
-We use as input an electret microphone to detect the words "yes" or "no" and
-turn the on-device LED on and off in response.
-
-### Pico Microphone
-
-This project is dependant on the `pico-microphone` library by
-[Sandeep Mistry](https://github.com/sandeepmistry).
-Take a look [here](https://github.com/sandeepmistry/pico-microphone) for more
-information about the library.
-
-## Contents
-
-- [Overview](#overview)
-- [Before You Begin](#before-you-begin)
-    - [Hardware Requirements](#hardware-requirements)
-    - [Hardware Setup](#hardware-setup)
-        - [Assembly](#assembly)
-        - [Wiring](#wiring)
-    - [Software Setup](#software-setup)
-- [Wake-Word uf2 file](#wake-word-uf2-file)
-- [Build Yourself](#build-yourself)
-- [Making Your Own Changes](#making-your-own-changes)
-- [Contributions](#contributions)
-- [License](#license)
+# Raspberry Pi Pico Smart Home Automation System
 
 ## Overview
-
+This repository contains the Python script for a smart home automation system implemented on a Raspberry Pi Pico board. The system utilizes GPIO pins for controlling devices such as fans and LEDs, and it communicates with other devices via UART.
 
 ### Hardware Requirements
 
@@ -46,99 +13,37 @@ information about the library.
 - 1x Ultrasonic Sensor
 - Jumper wires
 - 2x 1x20 male header pins (for the Pico)
-- 1x 1x5 male header pins (for the microphone)
 
-#### Assembly
+### Features
 
-1. Solder headers onto your Raspberry Pi Pico
-2. Solder headers onto your Adafruit Electret Microphone
+- Ultrasonic Sensor (USS): Measures distance and controls bedroom fan and light based on proximity.
+- UART Communication: Listens for commands through UART to control various devices.
+- Device Control: Controls bedroom fan, hall fan, bedroom LED, and hall LED based on received commands.
+- Automation Logic: Implements basic automation logic for turning on/off devices based on conditions.
 
-#### Wiring
+## Getting Started
 
-The electret microphone breakout is an analog input, meaning we can connect it
-to one of the ADC pins on the Raspberry Pi Pico. Make the following connections:
+### Prerequisites
 
-##### Analog Microphone
+- Raspberry Pi Pico board
+- Micro USB cable
+- MicroPython firmware installed on the Raspberry Pi Pico
 
-| __Adafruit Electret Microphone__ | __Raspberry Pi Pico__ |
-|------------------------------|-------------------|
-| OUT                          | ADC0 - Pin31      |
-| GND                          | Any ground pin    |
-| VDD                          | 3V3(OUT) - Pin36  |
+### How to run
 
+- Upload the Python script to your Raspberry Pi Pico board.
+- Connect the required devices (fans, LEDs, ultrasonic sensor) to the corresponding GPIO pins based on the script.
+- Power up the Raspberry Pi Pico.
+- Customize the script or UART commands based on your specific setup and requirements.
 
-### Software Setup
+### Usage
 
-The final step before using this application is to set up the software stack
-(CMake and compilers). The easiest way to do this is to follow the steps on the
-Raspberry Pi Pico SDK [repository](https://github.com/raspberrypi/pico-sdk).
-Once done you can test your tolchain setup by running some of the examples
-found in the Pico examples
-[repository](https://github.com/raspberrypi/pico-examples).
+- Ensure that the Raspberry Pi Pico is powered and the script is running.
+- Send commands through UART to control devices. Example commands:
+      - To turn on the bedroom fan: bedroom fan on
+      - To turn off all devices: turn off
+- Monitor the console output for distance measurements from the ultrasonic sensor.
 
-
-## Making Changes
-
-If you would like to use a different microphone, different LED, use other pins
-on Pico or change the audio quality, you will need to know how to make these
-changes to the application.
-
-### Changing the LED
-
-The LED settings can be found in `micro_speech/rp2/command_responder.cc`. To
-change the LED to a different pin (instead of the onboard LED), change the line:
-
-```cpp
-#define LED_PIN 25
-```
-
-To change the functionality of the LED, edit the `if-else` section:
-
-```cpp
-if (found_command == "yes"){
-  //turn led on
-  gpio_put(LED_PIN, 1);
-}
-else if (found_command == "no"){
-  //turn led off
-  gpio_put(LED_PIN, 0);
-}
-```
-
-### Changing the ADC
-
-The ADC pin is defined in the `src/audio_provider.cc` script. To
-change the pin used in the application, change the lines:
-
-```cpp
-#define ADC_PIN 26
-#define CAPTURE_CHANNEL 0
-```
-
-### Changing the Audio Quality
-
-You can change the audio quality captured in the application. By default, the
-Tensorflow model expects a `16kHz` quality. `16kHz` means `16000` samples every
-second. Below you can see the analog config in the `src/audio_provider.cc`
-file.
-
-```cpp
-const struct analog_microphone_config config = {
-    // GPIO to use for input, must be ADC compatible (GPIO 26 - 28)
-    .gpio = ADC_PIN + CAPTURE_CHANNEL,
-
-    // bias voltage of microphone in volts
-    .bias_voltage = 1.25,
-
-    // sample rate in Hz
-    .sample_rate = 16000,
-
-    // number of samples to buffer
-    .sample_buffer_size = ADC_BUFFER_SIZE,
-};
-```
-
-You can change the different settings to best suit your need.
-
-
-
+### Acknowledgments
+- The script is based on the Raspberry Pi Pico MicroPython documentation.
+- Thanks to the open-source community for providing resources and inspiration.
