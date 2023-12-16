@@ -35,35 +35,16 @@ information about the library.
 
 ## Overview
 
-The `micro_speech` app for the Raspberry Pi Pico is an adaptation taken from
-the "Wake-Word" example on Tensorflow Lite for Microcontrollers. Pete Warden's
-and Daniel Situnayake's _[TinyML](https://tinymlbook.com)_ book gives an
-in-depth look into how this model works and how to train your own. This
-repository ports the example to work on the Pico.
-
-The application works by listening to the microphone and processing the data
-before sending it the model to be analyzed. The application takes advantage of
-Pico's ADC and DMA for the analog microphone and the Pico's PIO and DMA for the
-PDM microphone to listen for samples, saving the CPU to perform the complex
-analysis.
-
-The Pico does not come with an onboard microphone. For this application, we use
-the Adafruit Auto-gain Electret Microphone Amplifier breakout.
-## Before You Begin
-
-We will now go through the setup of the project. This section contains three
-sub-sections, hardware requirements, hardware setup and software setup.
 
 ### Hardware Requirements
 
 - 1x [Raspberry Pi Pico](https://www.raspberrypi.org/products/raspberry-pi-pico/)
-- 1x [Electret Microphone Amplifier - MAX9814 with Auto Gain Control](https://www.adafruit.com/product/1713)
 - 1x Micro USB cable
-- 1x Micro USB cable
+- 1x HC 05 Bluetooth module
 - 2x LED
 - 2x Fans
 - 1x Ultrasonic Sensor
-- 3x Jumper wires
+- Jumper wires
 - 2x 1x20 male header pins (for the Pico)
 - 1x 1x5 male header pins (for the microphone)
 
