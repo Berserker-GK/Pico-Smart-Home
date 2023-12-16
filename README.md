@@ -33,19 +33,19 @@ This repository contains the Python script for a smart home automation system im
 
 - Upload the Python script to your Raspberry Pi Pico board.
 - Connect the required devices (fans, LEDs, ultrasonic sensor) to the corresponding GPIO pins based on the script.
-      - Bedroom Fan: GPIO 15
-      - Hall Fan: GPIO 14
-      - Bedroom LED: GPIO 16
-      - Hall LED: GPIO 18
-      - Ultrasonic Sensor Signal Pin: GPIO 0- Power up the Raspberry Pi Pico.
+-       Bedroom Fan: GPIO 15
+-       Hall Fan: GPIO 14
+-       Bedroom LED: GPIO 16
+-       Hall LED: GPIO 18
+-       Ultrasonic Sensor Signal Pin: GPIO 0- Power up the Raspberry Pi Pico.
 - Customize the script or UART commands based on your specific setup and requirements.
 
 ### Usage
 
 - Ensure that the Raspberry Pi Pico is powered and the script is running.
 - Send commands through UART to control devices. Example commands:
-      - To turn on the bedroom fan: bedroom fan on
-      - To turn off all devices: turn off
+-       To turn on the bedroom fan: bedroom fan on
+-       To turn off all devices: turn off
 - Monitor the console output for distance measurements from the ultrasonic sensor.
 
 ### UART Commands
