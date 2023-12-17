@@ -1,4 +1,4 @@
-# Raspberry Pi Pico Smart Home Automation System
+# [Raspberry Pi Pico Smart Home Automation System](https://youtu.be/9zQbTU63m74?si=w_9BN_95xl8TpYRz)
 
 ## Overview
 This repository contains the Python script for a smart home automation system implemented on a Raspberry Pi Pico board. The system utilizes GPIO pins for controlling devices such as fans and LEDs, and it communicates with other devices via UART.
